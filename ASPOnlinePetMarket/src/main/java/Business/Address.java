@@ -1,13 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Business;
-
-/**
- *
- * @author jasonrodriguez
- */
 public class Address {
     // Private fields to store the address components
     private String streetAddress;

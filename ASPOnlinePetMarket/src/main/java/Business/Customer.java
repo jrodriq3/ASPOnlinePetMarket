@@ -1,21 +1,16 @@
 package Business;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.ResultSetMetaData;
+import java.util.ArrayList;
+import net.ucanaccess.jdbc.UcanaccessSQLException;
+import java.util.List;
 
 
-/**
- *
- * @author jasonrodriguez
- */
 public class Customer {
     private int customerID;
     private String firstName;
@@ -24,6 +19,7 @@ public class Customer {
     private String email;
     private Address address;
     private String phoneNumber;
+    private List<Order> orderList;
     public Customer() {
         customerID = 0;
         firstName = "";
@@ -32,6 +28,7 @@ public class Customer {
         email = "";
         address = new Address();
         phoneNumber = "";
+        orderList = new ArrayList<>();
     }
     public Customer(int customerID, String firstName, String lastName, String password, String email, String streetAddress, String city, String state, int zip, String phoneNumber) {
         this.customerID = customerID;
@@ -122,44 +119,164 @@ public class Customer {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
+    public Address getAddress() {
+        return address;
+    }
+    public List<Order> getOrderList() {
+        return orderList;
+    }
+    public void setOrderList() {
+        // loading driver and database file
+        try {
+            Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+
+            // Determine the operating system
+            String os = System.getProperty("os.name").toLowerCase();
+            String conURL;
+
+            if (os.contains("win")) {
+                // Path for Windows
+                conURL = "jdbc:ucanaccess://C://Users/jason/Dropbox/Desktop-JasonsMacBookAircopy/DESKDOCS/AdvancedSystemProject/Project/Database/PetStoreASPDatabase.accdb";
+            } else if (os.contains("mac")) {
+                // Path for macOS
+                conURL = "jdbc:ucanaccess:///Users/jasonrodriguez/Dropbox/Desktop-JasonsMacBookAircopy/DESKDOCS/AdvancedSystemProject/Project/Database/PetStoreASPDatabase.accdb";
+            } else {
+                // Optionally handle other operating systems or throw an error
+                throw new UnsupportedOperationException("Unsupported operating system: " + os);
+            }
+            Connection con = DriverManager.getConnection(conURL);
+            Statement stmt = con.createStatement();
+            String sql = "select * from Orders where CustomerID = '" + getCustomerID() + "';";
+            ResultSet rs = stmt.executeQuery(sql);
+            // Loop through the result set and create Order objects
+            while (rs.next()) {
+                Order order = new Order();
+                order.setOrderID(rs.getInt("OrderID"));
+                order.setCustomerID(rs.getInt("CustomerID"));
+                order.setOrderDate(rs.getString("OrderDate"));
+                order.setOrderStatus(rs.getString("OrderStatus"));
+                order.setStreetAddress(rs.getString("ShippingStreet"));
+                order.setState(rs.getString("ShippingState"));
+                order.setZip(rs.getInt("ShippingZip"));
+                order.setCreatedAt(rs.getString("CreatedAt"));
+                order.setUpdatedAt(rs.getString("UpdatedAt"));
+                order.setTotalAmount(rs.getString("TotalAmount"));
+                orderList.add(order);
+            }
+            con.close();            
+        } 
+        
+        catch (UcanaccessSQLException e) {System.out.println("That record doesn't exits");}
+        catch (Exception e) {e.printStackTrace();}
+    }
+    public void selectDBByEmail(String email) {
+        try {
+            // loading driver and database file
+
+            Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+
+            // Determine the operating system
+            String os = System.getProperty("os.name").toLowerCase();
+            String conURL;
+
+            if (os.contains("win")) {
+                // Path for Windows
+                conURL = "jdbc:ucanaccess://C://Users/jason/Dropbox/Desktop-JasonsMacBookAircopy/DESKDOCS/AdvancedSystemProject/Project/Database/PetStoreASPDatabase.accdb";
+            } else if (os.contains("mac")) {
+                // Path for macOS
+                conURL = "jdbc:ucanaccess:///Users/jasonrodriguez/Dropbox/Desktop-JasonsMacBookAircopy/DESKDOCS/AdvancedSystemProject/Project/Database/PetStoreASPDatabase.accdb";
+            } else {
+                // Optionally handle other operating systems or throw an error
+                throw new UnsupportedOperationException("Unsupported operating system: " + os);
+            }
+            Connection con = DriverManager.getConnection(conURL);
+            Statement stmt = con.createStatement();
+            String sql = "select * from Customers where Email = '" + email + "';";
+            ResultSet rs = stmt.executeQuery(sql);
+            if (rs.next()) {
+                customerID = rs.getInt("CustomerID");
+                firstName = rs.getString("FirstName");
+                lastName = rs.getString("LastName");
+                password = rs.getString("Password");
+                this.email = rs.getString("Email");                
+                address.setStreetAddress(rs.getString("Street"));
+                address.setCity(rs.getString("City"));
+                address.setState(rs.getString("State"));
+                address.setZipCode(rs.getInt("ZipCode"));
+                phoneNumber = rs.getString("PhoneNumber");
+                setOrderList();
+            } else {
+                System.out.println("No record found for the given email");
+            }
+            con.close();            
+        } 
+        
+        catch (UcanaccessSQLException e) {System.out.println("That record doesn't exits");}
+        catch (Exception e) {e.printStackTrace();}
+    }
     public void selectDB() {
         try {
             // loading driver and database file
 
             Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
 
+            // Determine the operating system
+            String os = System.getProperty("os.name").toLowerCase();
+            String conURL;
 
-            String conURL = "jdbc:ucanaccess:///Users/jasonrodriguez/Dropbox/Desktop-JasonsMacBookAircopy/DESKDOCS/AdvancedSystemProject/Project/Database/PetStoreASPDatabase.accdb";
-
-
+            if (os.contains("win")) {
+                // Path for Windows
+                conURL = "jdbc:ucanaccess://C://Users/jason/Dropbox/Desktop-JasonsMacBookAircopy/DESKDOCS/AdvancedSystemProject/Project/Database/PetStoreASPDatabase.accdb";
+            } else if (os.contains("mac")) {
+                // Path for macOS
+                conURL = "jdbc:ucanaccess:///Users/jasonrodriguez/Dropbox/Desktop-JasonsMacBookAircopy/DESKDOCS/AdvancedSystemProject/Project/Database/PetStoreASPDatabase.accdb";
+            } else {
+                // Optionally handle other operating systems or throw an error
+                throw new UnsupportedOperationException("Unsupported operating system: " + os);
+            }
             Connection con = DriverManager.getConnection(conURL);
             Statement stmt = con.createStatement();
             String sql = "select * from Customers where CustomerID = '" + getCustomerID() + "';";
             ResultSet rs = stmt.executeQuery(sql);
             rs.next();
-            customerID = Integer.parseInt(rs.getString(1));
-            firstName = rs.getString(2);
-            lastName = rs.getString(3);
-            password = rs.getString(4);
-            email = rs.getString(5);
-            address.setStreetAddress(rs.getString(6));
-            address.setCity(rs.getString(7));
-            address.setState(rs.getString(8));
-            address.setZipCode(Integer.parseInt(rs.getString(9)));
-            phoneNumber = rs.getString(10);
+            customerID = rs.getInt("CustomerID");
+            firstName = rs.getString("FirstName");
+            lastName = rs.getString("LastName");
+            password = rs.getString("Password");
+            email = rs.getString("Email");
+            address.setStreetAddress(rs.getString("Street"));
+            address.setCity(rs.getString("City"));
+            address.setState(rs.getString("State"));
+            address.setZipCode(rs.getInt("ZipCode"));
+            phoneNumber = rs.getString("PhoneNumber");
+            setOrderList();
             con.close();
+            
             ///Users/jasonrodriguez/Dropbox/Desktop-JasonsMacBookAircopy/DESKDOCS/AdvancedSystemProject/Project/Database
             
-        } catch (Exception e) {
-            
-            e.printStackTrace();
-        }
+        } 
         
+        catch (UcanaccessSQLException e) {System.out.println("That record doesn't exits");}
+        catch (Exception e) {e.printStackTrace();}
     }
     public void insertDB() {
         try {
             Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-            String conURL = "jdbc:ucanaccess:///Users/jasonrodriguez/Dropbox/Desktop-JasonsMacBookAircopy/DESKDOCS/AdvancedSystemProject/Project/Database/PetStoreASPDatabase.accdb";
+
+            // Determine the operating system
+            String os = System.getProperty("os.name").toLowerCase();
+            String conURL;
+
+            if (os.contains("win")) {
+                // Path for Windows
+                conURL = "jdbc:ucanaccess://C://Users/jason/Dropbox/Desktop-JasonsMacBookAircopy/DESKDOCS/AdvancedSystemProject/Project/Database/PetStoreASPDatabase.accdb";
+            } else if (os.contains("mac")) {
+                // Path for macOS
+                conURL = "jdbc:ucanaccess:///Users/jasonrodriguez/Dropbox/Desktop-JasonsMacBookAircopy/DESKDOCS/AdvancedSystemProject/Project/Database/PetStoreASPDatabase.accdb";
+            } else {
+                // Optionally handle other operating systems or throw an error
+                throw new UnsupportedOperationException("Unsupported operating system: " + os);
+            }
             Connection con = DriverManager.getConnection(conURL);
             Statement stmt = con.createStatement();
             String sql = "insert into Customers "
@@ -167,6 +284,7 @@ public class Customer {
                     + getEmail() + "', '" + this.address.getStreetAddress() + "', '" + this.address.getCity() + "', '" + this.address.getState() + "', '" + this.address.getZipCode() + "', '" + getPhoneNumber() + "');";
             stmt.executeUpdate(sql);
             con.close();
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -174,7 +292,21 @@ public class Customer {
     public void updateDB() {
         try {
             Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-            String conURL = "jdbc:ucanaccess:///Users/jasonrodriguez/Dropbox/Desktop-JasonsMacBookAircopy/DESKDOCS/AdvancedSystemProject/Project/Database/PetStoreASPDatabase.accdb";
+
+            // Determine the operating system
+            String os = System.getProperty("os.name").toLowerCase();
+            String conURL;
+
+            if (os.contains("win")) {
+                // Path for Windows
+                conURL = "jdbc:ucanaccess://C://Users/jason/Dropbox/Desktop-JasonsMacBookAircopy/DESKDOCS/AdvancedSystemProject/Project/Database/PetStoreASPDatabase.accdb";
+            } else if (os.contains("mac")) {
+                // Path for macOS
+                conURL = "jdbc:ucanaccess:///Users/jasonrodriguez/Dropbox/Desktop-JasonsMacBookAircopy/DESKDOCS/AdvancedSystemProject/Project/Database/PetStoreASPDatabase.accdb";
+            } else {
+                // Optionally handle other operating systems or throw an error
+                throw new UnsupportedOperationException("Unsupported operating system: " + os);
+            }
             Connection con = DriverManager.getConnection(conURL);
             Statement stmt = con.createStatement();
             String sql = "UPDATE Customers " +
@@ -190,6 +322,7 @@ public class Customer {
                               "WHERE CustomerID = '" + getCustomerID() + "';";
             stmt.executeUpdate(sql);
             con.close();
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -198,16 +331,32 @@ public class Customer {
     public void deleteDB() {
         try {
             Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-            String conURL = "jdbc:ucanaccess:///Users/jasonrodriguez/Dropbox/Desktop-JasonsMacBookAircopy/DESKDOCS/AdvancedSystemProject/Project/Database/PetStoreASPDatabase.accdb";
+
+            // Determine the operating system
+            String os = System.getProperty("os.name").toLowerCase();
+            String conURL;
+
+            if (os.contains("win")) {
+                // Path for Windows
+                conURL = "jdbc:ucanaccess://C://Users/jason/Dropbox/Desktop-JasonsMacBookAircopy/DESKDOCS/AdvancedSystemProject/Project/Database/PetStoreASPDatabase.accdb";
+            } else if (os.contains("mac")) {
+                // Path for macOS
+                conURL = "jdbc:ucanaccess:///Users/jasonrodriguez/Dropbox/Desktop-JasonsMacBookAircopy/DESKDOCS/AdvancedSystemProject/Project/Database/PetStoreASPDatabase.accdb";
+            } else {
+                // Optionally handle other operating systems or throw an error
+                throw new UnsupportedOperationException("Unsupported operating system: " + os);
+            }
             Connection con = DriverManager.getConnection(conURL);
             Statement stmt = con.createStatement();
             String sql = "delete from Customers where CustomerID = '" + getCustomerID() + "';";
             stmt.executeUpdate(sql);
             con.close();
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+    
     public void displayRecord() {
         System.out.println("CustomerID: " + getCustomerID());
         System.out.println("FirstName: " + getFirstName());
@@ -217,38 +366,55 @@ public class Customer {
         System.out.println("Address: " + this.address.toString());
         System.out.println("PhoneNumber: " + getPhoneNumber());
     }
-    public static int getNextAvailableCustomerID() {
-        int nextCustomerID = 1; // Default starting ID if the table is empty
+    public static int getNextAutoIncrementIDWithRollback() {
+        int nextCustomerID = -1;
         Connection con = null;
         Statement stmt = null;
         ResultSet rs = null;
 
         try {
-            // Load the JDBC driver
             Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
 
-            // Establish a connection to the database
-            String conURL = "jdbc:ucanaccess:///Users/jasonrodriguez/Dropbox/Desktop-JasonsMacBookAircopy/DESKDOCS/AdvancedSystemProject/Project/Database/PetStoreASPDatabase.accdb";
-            con = DriverManager.getConnection(conURL);
+            // Determine the operating system
+            String os = System.getProperty("os.name").toLowerCase();
+            String conURL;
 
-            // Create a statement to execute SQL queries
-            stmt = con.createStatement();
-            String sql = "SELECT MAX(CustomerID) AS maxID FROM Customers";
-            rs = stmt.executeQuery(sql);
-            if (rs.next()) {
-                int maxID = rs.getInt("maxID");
-                
-                nextCustomerID = maxID + 1; // Increment by 1
+            if (os.contains("win")) {
+                conURL = "jdbc:ucanaccess://C://Users/jason/Dropbox/Desktop-JasonsMacBookAircopy/DESKDOCS/AdvancedSystemProject/Project/Database/PetStoreASPDatabase.accdb";
+            } else if (os.contains("mac")) {
+                conURL = "jdbc:ucanaccess:///Users/jasonrodriguez/Dropbox/Desktop-JasonsMacBookAircopy/DESKDOCS/AdvancedSystemProject/Project/Database/PetStoreASPDatabase.accdb";
+            } else {
+                throw new UnsupportedOperationException("Unsupported operating system: " + os);
             }
-            con.close();
 
+            con = DriverManager.getConnection(conURL);
+            con.setAutoCommit(false);  // Start transaction
+
+            stmt = con.createStatement();
+
+            // Insert a temporary row to trigger auto-increment
+            String insertSQL = "INSERT INTO Customers (FirstName, LastName) VALUES ('temp', 'temp')";
+            stmt.executeUpdate(insertSQL, Statement.RETURN_GENERATED_KEYS);
+
+            // Fetch the auto-incremented ID
+            rs = stmt.getGeneratedKeys();
+            if (rs.next()) {
+                nextCustomerID = rs.getInt(1);  // Get the auto-increment value
+            }
+
+            // Rollback the insert so it doesn't affect the database
+            con.rollback();
+
+            con.setAutoCommit(true);  // End transaction
+            con.close();
         } catch (Exception e) {
             e.printStackTrace();
-            return 0;
-        } 
+            return -1;
+        }
 
         return nextCustomerID;
     }
+    
     public static void printResultSet(ResultSet rs) throws Exception {
         // Get the metadata of the result set
         ResultSetMetaData rsMeta = rs.getMetaData();
@@ -269,12 +435,97 @@ public class Customer {
         }
     }
     public static void main(String[] args) {
+        Customer customer = new Customer();
+        customer.setCustomerID(2);
+        customer.selectDBByEmail("jason@yahoo.com");
+        for (Order order : customer.getOrderList()) {
+            // Access each order's details
+            System.out.println("Order ID: " + order.getOrderID());
+            System.out.println("Order Date: " + order.getOrderDate());
+            System.out.println("Order Status: " + order.getOrderStatus());
+            System.out.println("Address: " + order.getAddress().toString());
+            System.out.println("Created At: " + order.getCreatedAt());
+            System.out.println("Updated At: " + order.getUpdatedAt());
+            System.out.println("Total Amount: " + order.getTotalAmount());
+        }
         
-        Customer billy = new Customer();
-
-        billy.setCustomerID(2);
-        billy.selectDB();
-        billy.displayRecord();
+        
+        
+        
+        
+        
+        
+        
+        
+//        // Testing selectDB
+//        System.out.println("SELECT TESTING STARTED");
+//        Customer customer = new Customer();
+//        customer.setCustomerID(1); // Assuming there is a customer with ID 1 in the database
+//        customer.selectDB();
+//        customer.displayRecord();
+//        System.out.println("SELECT TESTING DONE");
+//
+//        // Testing insertDB
+//        System.out.println("INSERT TESTING STARTED");
+//        customer = new Customer();
+//        int nextAvailableCustomerID = getNextAutoIncrementIDWithRollback();
+//        customer.setCustomerID(nextAvailableCustomerID);
+//        System.out.println("NEXT AVAILABLE CUSTOMER ID = " + nextAvailableCustomerID);
+//        customer.setFirstName("John");
+//        customer.setLastName("Doe");
+//        customer.setPassword("password123");
+//        customer.setEmail("john.doe@example.com");
+//        customer.setStreet("123 Elm Street");
+//        customer.setCity("Springfield");
+//        customer.setState("IL");
+//        customer.setZip(62701);
+//        customer.setPhoneNumber("555-1234");
+//        customer.insertDB();
+//        customer = new Customer();
+//        customer.setCustomerID(nextAvailableCustomerID);
+//        customer.selectDB();
+//        customer.displayRecord();
+//        System.out.println("INSERT TESTING DONE");
+//        
+//
+//        // Testing updateDB
+//        System.out.println("UPDATE TESTING STARTED");
+//        customer = new Customer();
+//        customer.setCustomerID(nextAvailableCustomerID);
+//        customer.selectDB();
+//        System.out.println("BEFORE UPDATING");
+//        customer.displayRecord();
+//        customer.setFirstName("Jane");
+//        customer.setLastName("Smith");
+//        customer.setPassword("newpassword");
+//        customer.setEmail("jane.smith@example.com");
+//        customer.setStreet("456 Oak Street");
+//        customer.setCity("Capital City");
+//        customer.setState("CA");
+//        customer.setZip(90210);
+//        customer.setPhoneNumber("555-5678");
+//        customer.updateDB();
+//        customer = new Customer();
+//        customer.setCustomerID(nextAvailableCustomerID);
+//        customer.selectDB();
+//        System.out.println("AFTER UPDATING");
+//        customer.displayRecord();
+//        System.out.println("UPDATE TESTING DONE");
+//
+//        
+//        // Testing deleteDB
+//        System.out.println("DELETE TESTING STARTED");
+//        customer = new Customer();
+//        customer.setCustomerID(nextAvailableCustomerID);
+//        customer.selectDB();
+//        System.out.println("BEFORE DELETING");
+//        customer.displayRecord();
+//        customer.deleteDB();
+//        System.out.println("AFTER DELETING");
+//        customer = new Customer();
+//        customer.setCustomerID(nextAvailableCustomerID);
+//        customer.selectDB();
+//        customer.displayRecord();
 
     }
 }
