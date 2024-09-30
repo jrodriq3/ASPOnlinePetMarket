@@ -14,6 +14,7 @@ public class Staff {
     private String email;
     private String phoneNumber;
     private List<Order> allOrders;
+    private List<Customer> allCustomers;
     
 
     public Staff() {
@@ -24,6 +25,7 @@ public class Staff {
         email = "";
         phoneNumber = "";
         allOrders = new ArrayList<>();
+        allCustomers = new ArrayList<>();
     }
     public Staff(int staffID, String password, String firstName, String lastName, String email, String phoneNumber) {
         this.staffID = staffID;
@@ -87,7 +89,7 @@ public class Staff {
     public void setAllOrders() {
         try {
             // loading driver and database file
-
+            allOrders.clear();
             Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
 
             // Determine the operating system
@@ -126,6 +128,55 @@ public class Staff {
                 order.setNameOnCard(rs.getString("NameOnCard"));
                 
                 allOrders.add(order); // Add each order to the list
+            }
+            con.close();
+            
+        } 
+        
+        catch (UcanaccessSQLException e) {System.out.println("That record doesn't exits");}
+        catch (Exception e) {e.printStackTrace();}
+    }
+    public List<Customer> getAllCustomers() {
+        return allCustomers;
+    }
+    public void setAllCustomers() {
+        try {
+            // loading driver and database file
+            allOrders.clear();
+            Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+
+            // Determine the operating system
+            String os = System.getProperty("os.name").toLowerCase();
+            String conURL;
+
+            if (os.contains("win")) {
+                // Path for Windows
+                conURL = "jdbc:ucanaccess://C://Users/jason/Dropbox/Desktop-JasonsMacBookAircopy/DESKDOCS/AdvancedSystemProject/Project/Database/PetStoreASPDatabase.accdb";
+            } else if (os.contains("mac")) {
+                // Path for macOS
+                conURL = "jdbc:ucanaccess:///Users/jasonrodriguez/Dropbox/Desktop-JasonsMacBookAircopy/DESKDOCS/AdvancedSystemProject/Project/Database/PetStoreASPDatabase.accdb";
+            } else {
+                // Optionally handle other operating systems or throw an error
+                throw new UnsupportedOperationException("Unsupported operating system: " + os);
+            }
+
+            Connection con = DriverManager.getConnection(conURL);
+            Statement stmt = con.createStatement();
+            String sql = "SELECT * FROM Customers";
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                Customer customer = new Customer();
+                customer.setCustomerID(rs.getInt("CustomerID"));
+                customer.setFirstName(rs.getString("FirstName"));
+                customer.setLastName(rs.getString("LastName"));
+                customer.setPassword(rs.getString("Password"));
+                customer.setEmail(rs.getString("Email"));
+                customer.setStreet(rs.getString("Street"));
+                customer.setCity(rs.getString("City"));
+                customer.setState(rs.getString("State"));
+                customer.setZip(rs.getInt("ZipCode"));
+                customer.setPhoneNumber(rs.getString("PhoneNumber"));
+                allCustomers.add(customer);
             }
             con.close();
             

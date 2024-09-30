@@ -33,6 +33,7 @@
             if (staffMember != null) {
                 staffMember.setAllOrders(); // Populate the list of all orders
                 List<Order> allOrders = staffMember.getAllOrders();
+                session.setAttribute("allOrders", allOrders);
         %>
 
         <!-- Staff Info -->
@@ -47,15 +48,15 @@
         <!-- Orders -->
         <div class="order-history">
             <h2>Orders to Fulfill</h2>
-            <form action="UpdateOrderStatusServlet" method="POST"> <!-- Form to submit checkbox actions -->
+            <form action="UpdateOrderStatusServlet" method="POST">
                 <table class="order-table">
                     <thead>
                         <tr>
                             <th>Order ID</th>
                             <th>Date</th>
-                            <th>Status</th>
                             <th>Total</th>
-                            <th>Fulfill/Undo</th>
+                            <th>Status</th>
+                            <th>Change Status</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -63,9 +64,22 @@
                         <tr>
                             <td><%= order.getOrderID() %></td>
                             <td><%= order.getOrderDate() %></td>
-                            <td id="status-<%= order.getOrderID() %>"><%= order.getOrderStatus() %></td>
                             <td>$<%= order.getTotalAmount() %></td>
-                            <td><input type="checkbox" name="fulfilledOrders" value="<%= order.getOrderID() %>" onclick="toggleStatus(<%= order.getOrderID() %>)"></td>
+                            <td><%= order.getOrderStatus() %></td>
+                            <td>
+                                <select name="orderStatus_<%= order.getOrderID() %>">
+                                    <option value="Pending"
+                                        <% if (order.getOrderStatus().equals("Pending")) { %>
+                                            selected
+                                        <% } %>
+                                    >Pending</option>
+                                    <option value="Fulfilled"
+                                        <% if (order.getOrderStatus().equals("Fulfilled")) { %>
+                                            selected
+                                        <% } %>
+                                    >Fulfilled</option>
+                                </select>
+                            </td>
                         </tr>
                     <% } %>
                     </tbody>
@@ -78,19 +92,5 @@
             }
         %>
     </div>
-
-    <!-- JavaScript to change status between Fulfilled and pending -->
-    <script>
-        function toggleStatus(orderId) {
-            const statusCell = document.getElementById('status-' + orderId);
-            const checkbox = document.querySelector('input[value="' + orderId + '"]');
-            
-            if (checkbox.checked) {
-                statusCell.innerHTML = "Fulfilled"; // Mark as Fulfilled
-            } else {
-                statusCell.innerHTML = "Pending"; // Undo and mark as Pending
-            }
-        }
-    </script>
 </body>
 </html>

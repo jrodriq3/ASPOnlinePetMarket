@@ -1,8 +1,11 @@
 Business\Address.class
 ShoppingCartServlet.class
 com\mycompany\petstoreonlinewebapp\resources\JakartaEE91Resource.class
+ManageProductsServlet.class
 Business\Customer.class
+ManageOrdersServlet.class
 Business\ProductSearch.class
+UpdateOrderStatusServlet.class
 Business\Order.class
 testServlet.class
 Business\ShoppingCart.class
@@ -19,7 +22,9 @@ SignInServlet.class
 Business\Product.class
 Business\CartItem.class
 Business\MailSender.class
+ManageCustomersServlet.class
 StaffSignInServlet.class
 Business\Payment.class
+EditCustomerServlet.class
 Business\MailSender$1.class
 CheckoutRedirectServlet.class
