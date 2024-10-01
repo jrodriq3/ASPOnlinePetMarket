@@ -51,7 +51,7 @@
                         <tbody>
                         <% for (Customer customer: allCustomers) { %>
                             <tr>
-                                <td><input type="radio" name="customerID" value="<%= customer.getCustomerID() %>"></td>
+                                <td><input type="radio" name="customerID" value="<%= customer.getCustomerID() %>" required></td>
                                 <td><%= customer.getCustomerID() %></td>
                                 <td><%= customer.getFirstName() %></td>
                                 <td><%= customer.getLastName() %></td>

@@ -23,6 +23,7 @@ Business\Product.class
 Business\CartItem.class
 Business\MailSender.class
 ManageCustomersServlet.class
+UpdateCustomerServlet.class
 StaffSignInServlet.class
 Business\Payment.class
 EditCustomerServlet.class
