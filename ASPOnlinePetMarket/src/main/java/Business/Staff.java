@@ -15,6 +15,7 @@ public class Staff {
     private String phoneNumber;
     private List<Order> allOrders;
     private List<Customer> allCustomers;
+    private List<Product> allProducts;
     
 
     public Staff() {
@@ -26,6 +27,7 @@ public class Staff {
         phoneNumber = "";
         allOrders = new ArrayList<>();
         allCustomers = new ArrayList<>();
+        allProducts = new ArrayList<>();
     }
     public Staff(int staffID, String password, String firstName, String lastName, String email, String phoneNumber) {
         this.staffID = staffID;
@@ -85,6 +87,52 @@ public class Staff {
     }
     public List<Order> getAllOrders() {
         return allOrders;
+    }
+    public List<Product> getAllProducts() {
+        return allProducts;
+    }
+    public void setAllProducts() {
+        try {
+            // loading driver and database file
+            allProducts.clear();
+            Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+
+            // Determine the operating system
+            String os = System.getProperty("os.name").toLowerCase();
+            String conURL;
+
+            if (os.contains("win")) {
+                // Path for Windows
+                conURL = "jdbc:ucanaccess://C://Users/jason/Dropbox/Desktop-JasonsMacBookAircopy/DESKDOCS/AdvancedSystemProject/Project/Database/PetStoreASPDatabase.accdb";
+            } else if (os.contains("mac")) {
+                // Path for macOS
+                conURL = "jdbc:ucanaccess:///Users/jasonrodriguez/Dropbox/Desktop-JasonsMacBookAircopy/DESKDOCS/AdvancedSystemProject/Project/Database/PetStoreASPDatabase.accdb";
+            } else {
+                // Optionally handle other operating systems or throw an error
+                throw new UnsupportedOperationException("Unsupported operating system: " + os);
+            }
+
+            Connection con = DriverManager.getConnection(conURL);
+            Statement stmt = con.createStatement();
+            String sql = "SELECT * FROM Products";
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                Product product = new Product();
+                product.setProductID(rs.getInt("ProductID"));
+                product.setProductName(rs.getString("ProductName"));
+                product.setProductDescription(rs.getString("ProductDescription"));
+                product.setCategory(rs.getString("Category"));
+                product.setProductPrice(rs.getDouble("ProductPrice"));
+                product.setStockQuantity(rs.getInt("StockQuantity"));
+                
+                allProducts.add(product); // Add each product to the list
+            }
+            con.close();
+            
+        } 
+        
+        catch (UcanaccessSQLException e) {System.out.println("That record doesn't exits");}
+        catch (Exception e) {e.printStackTrace();}
     }
     public void setAllOrders() {
         try {
