@@ -1,7 +1,9 @@
 Business\Address.class
 ShoppingCartServlet.class
+UpdateOrderServlet.class
 com\mycompany\petstoreonlinewebapp\resources\JakartaEE91Resource.class
 ManageProductsServlet.class
+UpdateProductServlet.class
 Business\Customer.class
 ManageOrdersServlet.class
 Business\ProductSearch.class
@@ -11,9 +13,11 @@ testServlet.class
 Business\ShoppingCart.class
 EditProfileServlet.class
 Business\OrderItem.class
+EditProductServlet.class
 Business\Staff.class
 ForgotPasswordServlet.class
 com\mycompany\petstoreonlinewebapp\JakartaRestConfiguration.class
+EditOrderServlet.class
 CustomerCheckoutServlet.class
 GuestCheckoutServlet.class
 SearchServlet.class
