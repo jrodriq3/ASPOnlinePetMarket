@@ -25,7 +25,6 @@ body {
     flex-direction: column;
     border: 3px solid #39D075;
     border-radius: 15px;
-    /*margin-bottom: 100px;*/
     position: fixed;
     padding: 0;
         
@@ -81,9 +80,6 @@ body {
     text-align: center;
 }
 
-.topnav input {
-    width: 1000px;
-}
 
 /* Sales Bars */
 .Salesbar1, .Salesbar2 {
@@ -194,7 +190,10 @@ label {
 
 input[type="text"], input[type="password"] {
     width: 100%;
-    padding: 10px;
+    padding: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
     margin: 5px 0;
     border-radius: 5px;
     border: 1px solid #ccc;
