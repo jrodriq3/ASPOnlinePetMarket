@@ -12,9 +12,20 @@
     </head>
     <body>
         <div class="Banner">
-            <a href="index.html"><img src="images/hppsl.png" alt="picalt"></a>  
+            <a href="home.jsp"><img src="images/hppsl.png" alt="picalt"></a>  
             <div id="myLinks">
-              <a href="sign-in.jsp">Sign In</a>
+              <%
+                  // Check if there is a customer or staffMember in the session
+                  if (session.getAttribute("customer") != null || session.getAttribute("staffMember") != null) {
+              %>
+                  <a href="sign-out.jsp">Sign Out</a>
+              <%
+                  } else {
+              %>
+                  <a href="sign-in.jsp">Sign In</a>
+              <%
+                  }
+              %>
               <a href="ProductsServlet">Products</a>
               <a href="faq.jsp">FAQ</a>
             </div>

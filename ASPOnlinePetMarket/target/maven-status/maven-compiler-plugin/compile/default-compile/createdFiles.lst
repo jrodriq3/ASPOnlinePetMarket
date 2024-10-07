@@ -10,6 +10,7 @@ Business\ProductSearch.class
 UpdateOrderStatusServlet.class
 Business\Order.class
 testServlet.class
+SignOutServlet.class
 Business\ShoppingCart.class
 EditProfileServlet.class
 Business\OrderItem.class
