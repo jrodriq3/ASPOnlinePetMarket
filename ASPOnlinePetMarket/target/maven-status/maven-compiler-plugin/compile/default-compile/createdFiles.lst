@@ -16,6 +16,7 @@ EditProfileServlet.class
 Business\OrderItem.class
 EditProductServlet.class
 Business\Staff.class
+CreateCustomerServlet.class
 ForgotPasswordServlet.class
 com\mycompany\petstoreonlinewebapp\JakartaRestConfiguration.class
 EditOrderServlet.class
