@@ -47,6 +47,7 @@
                 </div>
             </form>
             <p>Forgot your password? <a href="forgot-password.jsp">Click here</a></p>
+            <p>Need An Account? <a href="create-account.jsp">Create Account</a></p>
         </div>
     </body>
 </html>

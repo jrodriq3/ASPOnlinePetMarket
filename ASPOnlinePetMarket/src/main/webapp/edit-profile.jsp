@@ -52,7 +52,7 @@
             </div>
             <div class="form-group">
                 <label for="email">Email:</label>
-                <input type="email" id="email" name="email"  required>
+                <input type="text" id="email" name="email"  required>
             </div>
             <div class="form-group">
                 <label for="password">Password:</label>
@@ -73,6 +73,10 @@
             <div class="form-group">
                 <label for="zipcode">Zip Code:</label>
                 <input type="text" id="zipcode" name="zipcode"  required>
+            </div>
+            <div class="form-group">
+                <label for="phone-number">Phone Number:</label>
+                <input type="text" id="phone-number" name="phone-number"  required>
             </div>
 
             <button type="submit" class="submit-button">Save Changes</button>
