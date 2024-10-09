@@ -46,7 +46,7 @@
             <div class="order-list">
                 <h2>Order List</h2>
                 <form action="EditOrderServlet" method="POST">
-                    <table class="order-table">
+                    <table class="common-table">
                         <thead>
                             <tr>
                                 <th>Select</th>
