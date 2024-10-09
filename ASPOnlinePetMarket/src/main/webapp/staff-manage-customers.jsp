@@ -46,7 +46,7 @@
             <div class="customer-list">
                 <h2>Customer List</h2>
                 <form action="EditCustomerServlet" method="POST">
-                    <table class="customer-table">
+                    <table class="common-table">
                         <thead>
                             <tr>
                                 <th>Select</th>

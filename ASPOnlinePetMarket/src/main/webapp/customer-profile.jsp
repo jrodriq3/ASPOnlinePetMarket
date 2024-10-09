@@ -37,8 +37,8 @@
             </div>
     </div>
     <div class="spacer"></div>
-    <div class="profile-container">
-        <h1 class="profile-title">Customer Profile</h1>
+    <div class="form-container">
+        <h1 class="form-title">Customer Profile</h1>
         <%
             Customer customer = (Customer)session.getAttribute("customer");
             if (customer != null) {
@@ -56,7 +56,7 @@
         <!-- Order History: ID, Date, status, and total-->
         <div class="order-history">
             <h2>Order History</h2>
-            <table class="order-table">
+            <table class="common-table">
                 <thead>
                     <tr>
                         <th>Order ID</th>
