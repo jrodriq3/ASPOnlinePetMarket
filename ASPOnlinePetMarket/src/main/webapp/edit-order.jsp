@@ -36,8 +36,8 @@
         </div>
         <div class="spacer"></div>
 
-        <div class="edit-customer-container">
-            <h2>Edit Order Details</h2>
+        <div class="form-container">
+            <h2 style="text-align: center;">Edit Order Details</h2>
             
             <% 
                 // Retrieve the order object from the request
@@ -61,7 +61,7 @@
 
                 <div class="form-group">
                     <label for="orderStatus">Order Status:</label>
-                    <input type="orderStatus" id="orderStatus" name="orderStatus" value="<%= order.getOrderStatus() %>" required>
+                    <input type="text" id="orderStatus" name="orderStatus" value="<%= order.getOrderStatus() %>" required>
                 </div>
 
                 <div class="form-group">
@@ -90,11 +90,11 @@
                 </div>
                 <div class="form-group">
                     <label for="totalAmount">Total Amount:</label>
-                    <input type="totalAmount" id="totalAmount" name="totalAmount" value="<%= order.getTotalAmount() %>" required>
+                    <input type="text" id="totalAmount" name="totalAmount" value="<%= order.getTotalAmount() %>" required>
                 </div>
                 <div class="form-group">
                     <label for="nameOnCard">Name On Card:</label>
-                    <input type="nameOnCard" id="nameOnCard" name="nameOnCard" value="<%= order.getNameOnCard() %>" required>
+                    <input type="text" id="nameOnCard" name="nameOnCard" value="<%= order.getNameOnCard() %>" required>
                 </div>
 
                 <!-- Submit button to update order details -->
