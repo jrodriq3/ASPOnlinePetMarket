@@ -36,8 +36,8 @@
         </div>
         <div class="spacer"></div>
 
-        <div class="edit-customer-container">
-            <h2>Edit Customer Details</h2>
+        <div class="form-container">
+            <h2 style="text-align: center;">Edit Customer Details</h2>
             
             <% 
                 // Retrieve the customer object from the request
@@ -66,7 +66,7 @@
 
                 <div class="form-group">
                     <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" value="<%= customer.getEmail() %>" required>
+                    <input type="text" id="email" name="email" value="<%= customer.getEmail() %>" required>
                 </div>
                 <div class="form-group">
                     <label for="street">Street:</label>
