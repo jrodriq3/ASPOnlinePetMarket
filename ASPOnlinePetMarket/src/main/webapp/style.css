@@ -157,17 +157,7 @@ body {
 
 
 
-.form-container {
-    width: auto; /* Allows the width to adjust dynamically */
-    max-width: 90%; /* Limits it to a max width for better responsiveness */
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    border: 3px solid #39D075;
-    transition: transform 0.2s ease-in-out;
-    overflow-x: auto; /* Ensures horizontal scrolling for wide tables */
-}
+
 .common-table {
     width: 100%;
     border-collapse: collapse;
@@ -197,7 +187,20 @@ body {
     background-color: #ddd;
 }
 
-
+.form-container {
+    width: auto; /* Allows the width to adjust dynamically */
+    max-width: 90%; /* Limits it to a max width for better responsiveness */
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    border: 3px solid #39D075;
+    transition: transform 0.2s ease-in-out;
+    overflow-x: auto; /* Ensures horizontal scrolling for wide tables */
+}
+.form-container h2 {
+    color: #39D075;
+}
 .form-container:hover {
     transform: scale(1.02);
 }
