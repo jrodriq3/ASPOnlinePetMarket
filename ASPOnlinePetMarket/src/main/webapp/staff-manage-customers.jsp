@@ -43,8 +43,8 @@
             if (staffMember != null) {
                 List<Customer> allCustomers = staffMember.getAllCustomers();
         %>
-            <div class="customer-list">
-                <h2>Customer List</h2>
+            <div class="form-container">
+                <h2 style="text-align: center;">Customer List</h2>
                 <form action="EditCustomerServlet" method="POST">
                     <table class="common-table">
                         <thead>
