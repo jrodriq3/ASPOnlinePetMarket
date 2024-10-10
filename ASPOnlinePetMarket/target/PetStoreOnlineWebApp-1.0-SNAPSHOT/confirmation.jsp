@@ -34,7 +34,7 @@
             </div>
     </div>
     <div class="spacer"></div>
-    <div class="confirmation-container">
+    <div class="form-container">
         <h1 class="confirmation-title">Thank You for Your Order!</h1>
         
         <p>Your order has been successfully placed. Here are the details:</p>

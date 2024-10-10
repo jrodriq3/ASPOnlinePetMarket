@@ -36,8 +36,8 @@
         </div>
         <div class="spacer"></div>
 
-        <div class="edit-product-container">
-            <h2>Edit Product Details</h2>
+        <div class="form-container">
+            <h2 style="text-align: center;">Edit Product Details</h2>
             
             <% 
                 // Retrieve the product object from the request

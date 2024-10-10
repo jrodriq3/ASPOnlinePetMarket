@@ -36,7 +36,7 @@
             </div>
     </div>
     <div class="spacer"></div>
-    <div class="checkout-container">
+    <div class="form-container">
         <br> <br>
         <h1 class="checkout-title">Customer Checkout</h1>
         
@@ -90,7 +90,7 @@
                 <h2>Shipping Information</h2>
                 <div class="form-group">
                     <label for="email">Email:</label>
-                    <input type="email" id="email" name="email"  required>
+                    <input type="text" id="email" name="email"  required>
                 </div>
                 <div class="form-group">
                     <label for="name-on-card">Name On Card:</label>

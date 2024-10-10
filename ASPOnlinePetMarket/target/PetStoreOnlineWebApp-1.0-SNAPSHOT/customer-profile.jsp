@@ -46,7 +46,7 @@
         %>
         <!-- temporary customer info-->
         <div class="account-info">
-            <h2>Account Information</h2>
+            <h2 style="text-align: center;">Account Information</h2>
             <p><strong>First Name:</strong> <%= customer.getFirstName() %></p>
             <p><strong>Last Name:</strong> <%= customer.getLastName() %></p>
             <p><strong>Email:</strong> <%= customer.getEmail() %></p>
@@ -55,7 +55,7 @@
         </div>
         <!-- Order History: ID, Date, status, and total-->
         <div class="order-history">
-            <h2>Order History</h2>
+            <h2 style="text-align: center;">Order History</h2>
             <table class="common-table">
                 <thead>
                     <tr>
@@ -84,7 +84,9 @@
             </table>
         </div>
         <!-- Link to edit profile page -->
-        <a href="edit-profile.jsp" class="edit-button">Edit Profile</a> 
+        <div style="text-align: center;">
+            <a href="edit-profile.jsp" class="edit-button">Edit Profile</a> 
+        </div>
         <%
             } else {
         %>
