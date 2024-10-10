@@ -37,14 +37,14 @@
             </div>
         </div>
         <div class="spacer"></div>
-        <div class="product-container">
+        <div class="form-container">
         <% 
             Staff staffMember = (Staff)session.getAttribute("staffMember");
             if (staffMember != null) {
                 List<Product> allProducts = staffMember.getAllProducts();
         %>
             <div class="order-list">
-                <h2>Product List</h2>
+                <h2 style="text-align: center;">Product List</h2>
                 <form action="EditProductServlet" method="POST">
                     <table class="common-table">
                         <thead>
