@@ -15,9 +15,20 @@
 </head>
 <body>
     <div class="Banner">
-            <a href="index.html"><img src="images/hppsl.png" alt="picalt"></a>  
+            <a href="home.jsp"><img src="images/hppsl.png" alt="picalt"></a>  
             <div id="myLinks">
-              <a href="sign-in.jsp">Sign In</a>
+              <%
+                  // Check if there is a customer or staffMember in the session
+                  if (session.getAttribute("customer") != null || session.getAttribute("staffMember") != null) {
+              %>
+                  <a href="sign-out.jsp">Sign Out</a>
+              <%
+                  } else {
+              %>
+                  <a href="sign-in.jsp">Sign In</a>
+              <%
+                  }
+              %>
               <a href="ProductsServlet">Products</a>
               <a href="faq.jsp">FAQ</a>
             </div>
@@ -26,7 +37,7 @@
     <div class="error-container">
         <h1 class="error-title">Oops! Something went wrong</h1>
         <p>We encountered an unexpected error. Please try again later or contact support if the problem persists.</p>
-        <a href="index.html" class="back-button">Go Back to Home</a>
+        <a href="home.jsp" class="back-button">Go Back to Home</a>
     </div>
 </body>
 </html>

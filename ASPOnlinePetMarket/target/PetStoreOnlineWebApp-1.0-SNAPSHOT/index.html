@@ -1,29 +1,33 @@
+
+
 <!DOCTYPE html>
+<!--jason rodriguez-->
 <html>
     <head>
+        
         <link rel="stylesheet" href="style.css" type="text/css"/>
 
         <title>Start Page</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <!--<meta http-equiv="refresh" content="0; url=home.jsp" />-->
        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+       <script type="text/javascript">
+        window.location.href = "home.jsp";
+        </script>
 
     </head>
     <body>
+        
         <div class="Banner">
-            <a href="index.html"><img src="images/hppsl.png" alt="picalt"></a>  
+            <a href="home.html"><img src="images/hppsl.png" alt="picalt"></a>  
             <div id="myLinks">
-              <a href="sign-in.jsp">Sign In</a>
-              <a href="ProductsServlet">Products</a>
-              <a href="faq.jsp">FAQ</a>
+              <a href="home.jsp">Home</a>
             </div>
         </div>
        
         <div class="spacer"></div>
         <div class="topnav">
-            <form action="SearchServlet" method="post">
-                <input type="text" maxlength="10" size="20" name="searchTerm" placeholder="Search for products...">
-                <button type="submit" value="Search">Search</button>
-            </form>
+            <a href="home.jsp">Enter Site</a>
 
         </div>
 

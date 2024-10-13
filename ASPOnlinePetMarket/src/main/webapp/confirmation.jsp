@@ -1,4 +1,3 @@
-
 <%-- 
     Document   : confirmation
     Created on : Sep 11, 2024, 2:57:15 PM
@@ -16,15 +15,26 @@
 </head>
 <body>
     <div class="Banner">
-            <a href="index.html"><img src="images/hppsl.png" alt="picalt"></a>  
+            <a href="home.jsp"><img src="images/hppsl.png" alt="picalt"></a>  
             <div id="myLinks">
-              <a href="sign-in.jsp">Sign In</a>
+              <%
+                  // Check if there is a customer or staffMember in the session
+                  if (session.getAttribute("customer") != null || session.getAttribute("staffMember") != null) {
+              %>
+                  <a href="sign-out.jsp">Sign Out</a>
+              <%
+                  } else {
+              %>
+                  <a href="sign-in.jsp">Sign In</a>
+              <%
+                  }
+              %>
               <a href="ProductsServlet">Products</a>
               <a href="faq.jsp">FAQ</a>
             </div>
     </div>
     <div class="spacer"></div>
-    <div class="confirmation-container">
+    <div class="form-container">
         <h1 class="confirmation-title">Thank You for Your Order!</h1>
         
         <p>Your order has been successfully placed. Here are the details:</p>
@@ -46,7 +56,7 @@
         <!-- Call to Action -->
         <div class="confirmation-actions">
             <p>You will receive a confirmation email shortly. If you have any questions, feel free to <a href="contact.jsp">contact us</a>.</p>
-            <a href="index.html" class="confirmation-button">Continue Shopping</a>
+            <a href="home.jsp" class="confirmation-button">Continue Shopping</a>
         </div>
     </div>
 </body>

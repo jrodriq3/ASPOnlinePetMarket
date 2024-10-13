@@ -28,6 +28,7 @@ public class EditProfileServlet extends HttpServlet {
         String streetAddress = request.getParameter("address");
         String city = request.getParameter("city");
         String zipcode = request.getParameter("zipcode");
+        String phoneNumber = request.getParameter("phone-number");
         customer.setFirstName(firstName);
         customer.setLastName(lastName);
         customer.setPassword(password);
@@ -35,6 +36,7 @@ public class EditProfileServlet extends HttpServlet {
         customer.setStreet(streetAddress);
         customer.setCity(city);
         customer.setZip(Integer.parseInt(zipcode));
+        customer.setPhoneNumber(phoneNumber);
         // Update database
         try {
             customer.updateDB();  

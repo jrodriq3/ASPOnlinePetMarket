@@ -7,7 +7,7 @@ import Business.Customer;
 
 /**
  *
- * @author jason
+ * @author jason rodriguez
  */
 @WebServlet(urlPatterns = {"/CheckoutRedirectServlet"})
 public class CheckoutRedirectServlet extends HttpServlet {

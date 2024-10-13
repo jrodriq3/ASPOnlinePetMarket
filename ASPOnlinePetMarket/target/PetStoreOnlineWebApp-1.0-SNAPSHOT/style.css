@@ -25,7 +25,6 @@ body {
     flex-direction: column;
     border: 3px solid #39D075;
     border-radius: 15px;
-    /*margin-bottom: 100px;*/
     position: fixed;
     padding: 0;
         
@@ -81,9 +80,6 @@ body {
     text-align: center;
 }
 
-.topnav input {
-    width: 1000px;
-}
 
 /* Sales Bars */
 .Salesbar1, .Salesbar2 {
@@ -159,17 +155,52 @@ body {
 
 
 
-/* Form Container */
+
+
+
+.common-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+.common-table th, .common-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.common-table th {
+    background-color: #39D075;
+    color: white;
+    border: 1px solid #ddd;
+}
+.common-table td {
+    border: 1px solid #ddd;
+}
+
+.common-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.common-table tr:hover {
+    background-color: #ddd;
+}
+
 .form-container {
-    width: 300px;
+    width: auto; /* Allows the width to adjust dynamically */
+    max-width: 90%; /* Limits it to a max width for better responsiveness */
     background-color: #ffffff;
     padding: 20px;
     border-radius: 15px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     border: 3px solid #39D075;
     transition: transform 0.2s ease-in-out;
+    overflow-x: auto; /* Ensures horizontal scrolling for wide tables */
 }
-
+.form-container h2 {
+    color: #39D075;
+}
 .form-container:hover {
     transform: scale(1.02);
 }
@@ -194,7 +225,10 @@ label {
 
 input[type="text"], input[type="password"] {
     width: 100%;
-    padding: 10px;
+    padding: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
     margin: 5px 0;
     border-radius: 5px;
     border: 1px solid #ccc;

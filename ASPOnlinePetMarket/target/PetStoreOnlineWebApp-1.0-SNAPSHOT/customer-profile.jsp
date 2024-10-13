@@ -18,16 +18,27 @@
 </head>
 <body>
     <div class="Banner">
-            <a href="index.html"><img src="images/hppsl.png" alt="picalt"></a>  
+            <a href="home.jsp"><img src="images/hppsl.png" alt="picalt"></a>  
             <div id="myLinks">
-              <a href="sign-in.jsp">Sign In</a>
+              <%
+                  // Check if there is a customer or staffMember in the session
+                  if (session.getAttribute("customer") != null || session.getAttribute("staffMember") != null) {
+              %>
+                  <a href="sign-out.jsp">Sign Out</a>
+              <%
+                  } else {
+              %>
+                  <a href="sign-in.jsp">Sign In</a>
+              <%
+                  }
+              %>
               <a href="ProductsServlet">Products</a>
               <a href="faq.jsp">FAQ</a>
             </div>
     </div>
     <div class="spacer"></div>
-    <div class="profile-container">
-        <h1 class="profile-title">Customer Profile</h1>
+    <div class="form-container">
+        <h1 class="form-title">Customer Profile</h1>
         <%
             Customer customer = (Customer)session.getAttribute("customer");
             if (customer != null) {
@@ -35,7 +46,7 @@
         %>
         <!-- temporary customer info-->
         <div class="account-info">
-            <h2>Account Information</h2>
+            <h2 style="text-align: center;">Account Information</h2>
             <p><strong>First Name:</strong> <%= customer.getFirstName() %></p>
             <p><strong>Last Name:</strong> <%= customer.getLastName() %></p>
             <p><strong>Email:</strong> <%= customer.getEmail() %></p>
@@ -44,8 +55,8 @@
         </div>
         <!-- Order History: ID, Date, status, and total-->
         <div class="order-history">
-            <h2>Order History</h2>
-            <table class="order-table">
+            <h2 style="text-align: center;">Order History</h2>
+            <table class="common-table">
                 <thead>
                     <tr>
                         <th>Order ID</th>
@@ -73,7 +84,9 @@
             </table>
         </div>
         <!-- Link to edit profile page -->
-        <a href="edit-profile.jsp" class="edit-button">Edit Profile</a> 
+        <div style="text-align: center;">
+            <a href="edit-profile.jsp" class="edit-button">Edit Profile</a> 
+        </div>
         <%
             } else {
         %>

@@ -17,15 +17,26 @@
 </head>
 <body>
     <div class="Banner">
-            <a href="index.html"><img src="images/hppsl.png" alt="picalt"></a>  
+            <a href="home.jsp"><img src="images/hppsl.png" alt="picalt"></a>  
             <div id="myLinks">
-              <a href="sign-in.jsp">Sign In</a>
+              <%
+                  // Check if there is a customer or staffMember in the session
+                  if (session.getAttribute("customer") != null || session.getAttribute("staffMember") != null) {
+              %>
+                  <a href="sign-out.jsp">Sign Out</a>
+              <%
+                  } else {
+              %>
+                  <a href="sign-in.jsp">Sign In</a>
+              <%
+                  }
+              %>
               <a href="ProductsServlet">Products</a>
               <a href="faq.jsp">FAQ</a>
             </div>
     </div>
     <div class="spacer"></div>
-    <div class="checkout-container">
+    <div class="form-container">
         <br> <br>
         <h1 class="checkout-title">Customer Checkout</h1>
         
@@ -79,7 +90,7 @@
                 <h2>Shipping Information</h2>
                 <div class="form-group">
                     <label for="email">Email:</label>
-                    <input type="email" id="email" name="email"  required>
+                    <input type="text" id="email" name="email"  required>
                 </div>
                 <div class="form-group">
                     <label for="name-on-card">Name On Card:</label>

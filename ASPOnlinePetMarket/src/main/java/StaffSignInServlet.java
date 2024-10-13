@@ -19,7 +19,7 @@ public class StaffSignInServlet extends HttpServlet {
         if (password.equals(staffMember.getPassword())) {
             // Set the staffMember object in the session and redirect to the staff profile page
             request.getSession().setAttribute("staffMember", staffMember);
-            response.sendRedirect("staff-profile.jsp");
+            response.sendRedirect("staff-home.jsp");
         } else {
             // If password does not match, forward to error page
             RequestDispatcher dispatcher = request.getRequestDispatcher("error.jsp");
