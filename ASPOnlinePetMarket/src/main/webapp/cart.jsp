@@ -54,6 +54,18 @@
         form {
             margin-top: 20px;
         }
+        .button-link {
+            margin-top: 5px;
+            background-color: #339933; 
+            color: #fff;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
 
         button {
             background-color: #339933; 
@@ -125,6 +137,8 @@
         <form action="CheckoutRedirectServlet" method="POST">
             <button type="submit">Go to Checkout</button>
         </form>
+        <a href="ProductsServlet" class="button-link">Continue Shopping</a>
+        <a href="javascript:history.back()" class="button-link">Go Back</a>
     <%
         }
     %>
