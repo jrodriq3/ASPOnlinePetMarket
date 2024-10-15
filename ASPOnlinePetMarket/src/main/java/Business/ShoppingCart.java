@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import net.ucanaccess.jdbc.UcanaccessSQLException;
 
+
 public class ShoppingCart {
     private int cartID;
     private int customerID;
@@ -69,6 +70,14 @@ public class ShoppingCart {
     public void setUpdatedAt(String updatedAt) {
         this.updatedAt = updatedAt;
     }
+    public void removeProduct(int productID) {
+    for (Product product : productList) {
+        if (product.getProductID() == productID) {
+            productList.remove(product);
+            break;
+        }
+    }
+}
     public void selectDB() {
         try {
             // loading driver and database file
