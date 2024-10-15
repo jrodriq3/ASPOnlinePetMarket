@@ -122,6 +122,7 @@
                 <th>Category</th>
                 <th>Stock Quantity</th>
                 <th>Price</th>
+                <th>Action</th>
             </tr>
             <c:forEach var="product" items="${cart.productList}">
                 <tr>
@@ -131,6 +132,12 @@
                     <td>${product.category}</td>
                     <td>${product.stockQuantity}</td>
                     <td>$${product.productPrice}</td>
+                    <td>
+                        <form action="RemoveCartItemServlet" method="POST" style="margin: 0;">
+                            <input type="hidden" name="productID" value="${product.productID}">
+                            <button type="submit">Remove</button>
+                        </form>
+                    </td>
                 </tr>
             </c:forEach>
         </table>
