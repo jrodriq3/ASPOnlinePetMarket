@@ -50,9 +50,9 @@
             }
         %>
         </div>
-        <a href="ManageCustomersServlet">Manage Customers</a>
-        <a href="ManageOrdersServlet">Manage Orders</a>
-        <a href="ManageProductsServlet">Manage Products</a>
+        <a href="ManageCustomersServlet" class="button-link" style="margin-top: 5px;">Manage Customers</a>
+        <a href="ManageOrdersServlet" class="button-link" style="margin-top: 5px;">Manage Orders</a>
+        <a href="ManageProductsServlet" class="button-link" style="margin-top: 5px;">Manage Products</a>
         
     </body>
 </html>
