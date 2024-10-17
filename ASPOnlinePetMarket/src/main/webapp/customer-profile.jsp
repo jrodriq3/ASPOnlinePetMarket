@@ -85,7 +85,7 @@
         </div>
         <!-- Link to edit profile page -->
         <div style="text-align: center;">
-            <a href="edit-profile.jsp" class="edit-button">Edit Profile</a> 
+            <a href="edit-profile.jsp" class="button-link">Edit Profile</a> 
         </div>
         <%
             } else {
