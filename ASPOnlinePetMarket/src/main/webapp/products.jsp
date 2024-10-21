@@ -36,16 +36,19 @@
                 List<Product> products = (List<Product>) request.getAttribute("productList");
                 
                 // Check if the product list is not empty
-                if (products != null && !products.isEmpty()) {
+                if (products != null && !products.isEmpty()) { 
                     for (Product product : products) {
             %>
+            
                         <div class="product-item">
                             <h2><%= product.getProductName() %></h2>
                             <p><strong>Description:</strong> <%= product.getProductDescription() %></p>
                             <p><strong>Category:</strong> <%= product.getCategory() %></p>
                             <p><strong>Price:</strong> $<%= product.getProductPrice() %></p>
                             <p><strong>In Stock:</strong> <%= product.getStockQuantity() %> units</p>
+                            <button type="button">Add to Cart</button>
                         </div>
+                        
             <%
                     }
                 } else {
