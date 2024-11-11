@@ -34,11 +34,12 @@
         <div class="products-container">
             <%
                 // Retrieve the list of products passed from the servlet
-                List<Product> products = (List<Product>) request.getAttribute("productList");
+                Product myProduct = new Product();
+                List<Product> AllProducts = (List<Product>) myProduct.getAllProducts();
                 
                 // Check if the product list is not empty
-                if (products != null && !products.isEmpty()) { 
-                    for (Product product : products) {
+                if (AllProducts != null && !AllProducts.isEmpty()) { 
+                    for (Product product : AllProducts) {
             %>
             
                         <div class="product-item">
@@ -47,7 +48,16 @@
                             <p><strong>Category:</strong> <%= product.getCategory() %></p>
                             <p><strong>Price:</strong> $<%= product.getProductPrice() %></p>
                             <p><strong>In Stock:</strong> <%= product.getStockQuantity() %> units</p>
-                            <button type="button" onclick="window.location.href='ShoppingCartServlet';">Add to Cart</button>
+                            
+                            
+                            <form action="ShoppingCartServlet" method="POST">
+                                <input type="hidden" name="productID" value="<%= product.getProductID() %>" />
+                                <button type="submit">Add to Cart</button>
+                            </form>
+                            
+                            
+                            
+         <!--//                    <button type="button" onclick="window.location.href='ShoppingCartServlet';">Add to Cart</button>-->
                         </div>
                         
             <%
