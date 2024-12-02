@@ -18,6 +18,7 @@ public class Product {
     private int stockQuantity;
     private String category;
     private double productPrice;
+    
     public Product() {
         productID = 0;
         productName = "";
